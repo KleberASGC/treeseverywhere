@@ -32,7 +32,7 @@ class PlantedTreeInline(admin.TabularInline):
 
 @admin.register(Tree)
 class TreeAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name']  # Adicione outros campos se desejar
+    list_display = ['id', 'name']
     inlines = [PlantedTreeInline]
 
 admin.site.register(Account, AccountAdmin)

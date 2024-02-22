@@ -54,7 +54,7 @@ class User(BaseUser):
             planted_tree = PlantedTree.objects.create(
                 user=self,
                 tree=tree,
-                account=self.accounts.first(),  # Assume que o usuário está associado a uma conta
+                account=self.accounts.first(),
                 latitude=latitude,
                 longitude=longitude
             )
