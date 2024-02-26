@@ -27,7 +27,7 @@ Creating a virtual environment helps in isolating project dependencies and keeps
 Navigate to the project directory and create a virtual environment using the following command:
 
 ```bash
-python -m venv env
+python -m venv myenv
 ```
 
 Replace myenv with the name you prefer for your virtual environment.
@@ -52,7 +52,7 @@ source myenv/bin/activate
 Navigate to the project directory and install the required dependencies using pip:
 
 ```bash
-cd trees_everywhere
+cd treeseverywhere
 pip install -r requirements.txt
 ```
 
