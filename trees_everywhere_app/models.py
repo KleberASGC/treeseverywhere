@@ -7,6 +7,9 @@ class Account(models.Model):
     active = models.BooleanField(default=True)
     users = models.ManyToManyField(BaseUser, related_name='accounts')
 
+    def __str__(self):
+        return self.name
+
 class Profile(models.Model):
     user = models.OneToOneField(BaseUser, on_delete=models.CASCADE)
     about = models.TextField()
@@ -15,6 +18,9 @@ class Profile(models.Model):
 class Tree(models.Model):
     name = models.CharField(max_length=255)
     scientific_name = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.name
 
 
 class PlantedTree(models.Model):
