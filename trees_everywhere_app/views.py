@@ -1,8 +1,19 @@
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
 from .forms import LoginForm, PlantedTreeForm
-from .models import PlantedTree, Tree, Account
+from .models import PlantedTree
+from .serializers import PlantedTreeSerializer
+
+class UserPlantedTreesAPIView(generics.ListAPIView):
+    serializer_class = PlantedTreeSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        return PlantedTree.objects.filter(user=user)
 
 def user_planted_trees_view(request):
     user_accounts = request.user.accounts.all()
@@ -20,7 +31,7 @@ def add_planted_tree_view(request):
             planted_tree.tree = tree
             planted_tree.account = account
             planted_tree.save()
-            return redirect('planted_trees')  # Redirecione para a página que lista as árvores plantadas após adicionar com sucesso
+            return redirect('planted_trees')
     else:
         form = PlantedTreeForm()
     return render(request, 'add_planted_tree.html', {'form': form})
@@ -44,10 +55,8 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                # Redirecione para a view de planted_trees após o login
-                return redirect('planted_trees')  # 'planted_trees' é o nome da nova view
+                return redirect('planted_trees')
             else:
-                # Se as credenciais de login forem inválidas, exiba uma mensagem de erro
                 messages.error(request, 'Invalid username or password. Please try again.')
     else:
         form = LoginForm()
