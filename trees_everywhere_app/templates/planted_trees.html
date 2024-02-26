@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planted Trees</title>
+</head>
+<body>
+    <h2>Planted Trees</h2>
+    {% if planted_trees %}
+        <ul>
+            {% for tree in planted_trees %}
+                <li>
+                    <a href="{% url 'tree_details' tree.id %}">{{ tree.tree.name }}</a> - {{ tree.planted_at }}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No trees planted yet.</p>
+    {% endif %}
+
+    <a href="{% url 'add_planted_tree' %}" class="btn btn-primary">Add Planted Tree</a>
+    <br>
+    <a href="{% url 'user_planted_trees' %}">View User Planted Trees (from all accounts)</a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!-- add_planted_tree.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Planted Tree</title>
+</head>
+<body>
+    <h2>Add Planted Tree</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Add Tree">
+    </form>
+</body>
+</html>
