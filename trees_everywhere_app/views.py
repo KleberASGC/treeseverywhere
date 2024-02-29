@@ -38,7 +38,8 @@ def add_planted_tree_view(request):
 
 def planted_trees_view(request):
     user = request.user
-    planted_trees = PlantedTree.objects.filter(user=user)
+    user_first_account = user.accounts.first()
+    planted_trees = PlantedTree.objects.filter(account = user_first_account)
     form = PlantedTreeForm()
     return render(request, 'planted_trees.html', {'planted_trees': planted_trees, 'form': form})
 
